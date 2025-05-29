@@ -4,6 +4,7 @@ import RootLayout from "../layouts/RootLayout";
 import ApplyJob from "../pages/ApplyJob";
 import Home from "../pages/Home";
 import JobDetails from "../pages/JobDetails";
+import MyApplications from "../pages/MyApplications/MyApplication";
 import Register from "../pages/Register";
 import SignIn from "../pages/SignIn";
 import PrivateRouter from "./PrivateRouter";
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
                 element: (
                     <PrivateRouter>
                         <ApplyJob></ApplyJob>
+                    </PrivateRouter>
+                ),
+            },
+            {
+                path: "/my-applications",
+                element: (
+                    <PrivateRouter>
+                        <MyApplications></MyApplications>
                     </PrivateRouter>
                 ),
             },
