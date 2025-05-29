@@ -9,7 +9,7 @@ import { auth } from "../firebase/firebase.config";
 import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const createUser = (email, password) => {
         setLoading(true);
@@ -30,7 +30,6 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            console.log("user in the auth state change", currentUser);
         });
 
         return () => {
@@ -43,7 +42,7 @@ const AuthProvider = ({ children }) => {
         user,
         createUser,
         signInUser,
-        signOutUser
+        signOutUser,
     };
 
     return <AuthContext value={authData}>{children}</AuthContext>;

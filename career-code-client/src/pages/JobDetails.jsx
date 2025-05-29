@@ -1,7 +1,7 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const JobDetails = () => {
-    const { title, location, description, company, salaryRange } =
+    const { _id, title, location, description, company, salaryRange } =
         useLoaderData();
     return (
         <div className="m-4 p-4 card shadow-2xl">
@@ -15,7 +15,9 @@ const JobDetails = () => {
             <p>Description: {description}</p>
             <br />
             <div className="text-right">
-                <button className="btn btn-primary">Apply Now</button>
+                <Link to={`/apply-job/${_id}`}>
+                    <button className="btn btn-primary">Apply Now</button>
+                </Link>
             </div>
         </div>
     );

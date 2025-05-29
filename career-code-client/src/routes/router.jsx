@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router";
 import AuthLayout from "../layouts/AuthLayout";
 import RootLayout from "../layouts/RootLayout";
+import ApplyJob from "../pages/ApplyJob";
 import Home from "../pages/Home";
 import JobDetails from "../pages/JobDetails";
 import Register from "../pages/Register";
 import SignIn from "../pages/SignIn";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
                 hydrateFallbackElement: "Loading...",
                 loader: ({ params }) =>
                     fetch(`http://localhost:3000/jobs/${params.id}`),
+            },
+            {
+                path: "/apply-job/:id",
+                element: (
+                    <PrivateRouter>
+                        <ApplyJob></ApplyJob>
+                    </PrivateRouter>
+                ),
             },
         ],
     },
