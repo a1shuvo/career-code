@@ -1,8 +1,33 @@
+import { use } from "react";
+import ApplicationRow from "./ApplicationRow";
 
-const ApplicationsList = () => {
+const ApplicationsList = ({ applicationsPromise }) => {
+    const applications = use(applicationsPromise);
+    console.log(applications);
+
     return (
-        <div>
-            Application List
+        <div className="overflow-x-auto">
+            <table className="table">
+                {/* head */}
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Job</th>
+                        <th>Favorite Color</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {applications.map((application, index) => (
+                        <ApplicationRow
+                            key={application._id}
+                            application={application}
+                            index={index}
+                        ></ApplicationRow>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };

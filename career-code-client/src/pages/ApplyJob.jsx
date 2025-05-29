@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Link, useParams } from "react-router";
 import Swal from "sweetalert2";
-import useAuth from "../hooks/useauth";
+import useAuth from "../hooks/useAuth";
 
 const ApplyJob = () => {
     const { id: jobId } = useParams();

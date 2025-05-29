@@ -4,7 +4,7 @@ import RootLayout from "../layouts/RootLayout";
 import ApplyJob from "../pages/ApplyJob";
 import Home from "../pages/Home";
 import JobDetails from "../pages/JobDetails";
-import MyApplications from "../pages/MyApplications/MyApplication";
+import MyApplications from "../pages/MyApplications/MyApplications";
 import Register from "../pages/Register";
 import SignIn from "../pages/SignIn";
 import PrivateRouter from "./PrivateRouter";
