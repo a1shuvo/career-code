@@ -3,7 +3,6 @@ import ApplicationRow from "./ApplicationRow";
 
 const ApplicationsList = ({ applicationsPromise }) => {
     const applications = use(applicationsPromise);
-    console.log(applications);
 
     return (
         <div className="overflow-x-auto">
@@ -12,7 +11,7 @@ const ApplicationsList = ({ applicationsPromise }) => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th>Company</th>
                         <th>Job</th>
                         <th>Favorite Color</th>
                         <th></th>

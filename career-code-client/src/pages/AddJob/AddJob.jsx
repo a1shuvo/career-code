@@ -28,19 +28,23 @@ const AddJob = () => {
         newJob.status = "active";
 
         // Send Data to DB
-        axios.post("http://localhost:3000/jobs", newJob).then((res) => {
-            if (res.data.insertedId) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your new job added successfully!",
-                    showConfirmButton: false,
-                    timer: 1500,
-                }).catch((error) => {
-                    console.log(error);
-                });
-            }
-        });
+        axios
+            .post("http://localhost:3000/jobs", newJob)
+            .then((res) => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your new job added successfully!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
     return (
         <div>
@@ -77,7 +81,7 @@ const AddJob = () => {
                     <label className="label">Company Logo</label>
                     <input
                         type="url"
-                        name="compnay_logo"
+                        name="company_logo"
                         className="input"
                         placeholder="Company Logo URL"
                     />
