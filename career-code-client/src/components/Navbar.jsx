@@ -18,12 +18,22 @@ const Navbar = () => {
             <li>
                 <NavLink to={"/"}>Home</NavLink>
             </li>
+            {/* For job applicant. check role as well. */}
             {user && (
                 <>
                     <li>
                         <NavLink to={"/my-applications"}>
                             My Applications
                         </NavLink>
+                    </li>
+                </>
+            )}
+
+            {/* For Recruiter. Check role as well. */}
+            {user && (
+                <>
+                    <li>
+                        <NavLink to={"/add-job"}>Add Job</NavLink>
                     </li>
                 </>
             )}
@@ -61,7 +71,7 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="font-bold text-xl">Career Code</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">{links}</ul>
