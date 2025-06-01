@@ -5,6 +5,10 @@ require("dotenv").config();
 const port = process.env.PORT || 3000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
+// firebase admin
+const admin = require("firebase-admin");
+const serviceAccount = require("./firebase-service-key.json");
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -20,10 +24,24 @@ const client = new MongoClient(uri, {
     },
 });
 
+// firebase admin initialize
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+});
+
 const verifyFirebaseToken = async (req, res, next) => {
     const authHeader = req.headers?.authorization;
-    console.log(authHeader);
-    next();
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).send({ message: "Unauthorized Access" });
+    }
+    const token = authHeader.split(" ")[1];
+    try {
+        const decoded = await admin.auth().verifyIdToken(token);
+        req.decoded = decoded;
+        next();
+    } catch (error) {
+        return res.status(401).send({ message: "Unauthorized Access" });
+    }
 };
 
 async function run() {
@@ -37,8 +55,11 @@ async function run() {
             .collection("applications");
 
         // jobs api
-        app.get("/jobs", async (req, res) => {
+        app.get("/jobs", verifyFirebaseToken, async (req, res) => {
             const email = req.query.email;
+            if (email !== req.decoded.email) {
+                return res.status(403).send({ message: "Forbidden Access" });
+            }
             const query = {};
             if (email) {
                 query.hr_email = email;
@@ -63,6 +84,9 @@ async function run() {
         // job applications related api
         app.get("/applications", verifyFirebaseToken, async (req, res) => {
             const email = req.query.email;
+            if (email !== req.decoded.email) {
+                return res.status(403).send({ message: "Forbidden Access" });
+            }
             const query = {
                 applicant: email,
             };
