@@ -16,7 +16,10 @@ const MyApplications = () => {
                 }
             >
                 <ApplicationsList
-                    applicationsPromise={applicationsPromise(user.email)}
+                    applicationsPromise={applicationsPromise(
+                        user.email,
+                        user.accessToken
+                    )}
                 ></ApplicationsList>
             </Suspense>
         </div>

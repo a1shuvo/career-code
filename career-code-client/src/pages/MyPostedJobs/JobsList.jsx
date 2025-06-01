@@ -12,7 +12,8 @@ const JobsList = ({ jobsCreatedByPromise }) => {
                         <th>#</th>
                         <th>Job Title</th>
                         <th>Deadline</th>
-                        <th>Favorite Color</th>
+                        <th>Count</th>
+                        <th>Applications</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,8 +22,12 @@ const JobsList = ({ jobsCreatedByPromise }) => {
                             <th>{index + 1}</th>
                             <td>{job.title}</td>
                             <td>{job.applicationDeadline}</td>
+                            <td>0</td>
                             <td>
-                                <Link className="btn btn-sm btn-outline btn-primary" to={`/applications/${job._id}`}>
+                                <Link
+                                    className="btn btn-sm btn-outline btn-primary"
+                                    to={`/applications/${job._id}`}
+                                >
                                     View Applications
                                 </Link>
                             </td>

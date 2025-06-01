@@ -20,6 +20,12 @@ const client = new MongoClient(uri, {
     },
 });
 
+const verifyFirebaseToken = async (req, res, next) => {
+    const authHeader = req.headers?.authorization;
+    console.log(authHeader);
+    next();
+};
+
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
@@ -55,7 +61,7 @@ async function run() {
         });
 
         // job applications related api
-        app.get("/applications", async (req, res) => {
+        app.get("/applications", verifyFirebaseToken, async (req, res) => {
             const email = req.query.email;
             const query = {
                 applicant: email,

@@ -1,8 +1,17 @@
 import axios from "axios";
 
-export const applicationsPromise = (email) => {
-    return axios
-        .get(`http://localhost:3000/applications?email=${email}`)
-        .then((res) => res.data)
-        .catch((error) => console.log(error));
+export const applicationsPromise = async (email, accessToken) => {
+    try {
+        const res = await axios.get(
+            `http://localhost:3000/applications?email=${email}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
+        );
+        return res.data;
+    } catch (error) {
+        return console.log(error);
+    }
 };
