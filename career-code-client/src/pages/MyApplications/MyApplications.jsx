@@ -1,11 +1,12 @@
 import { Suspense } from "react";
-import { applicationsPromise } from "../../api/applicationsApi";
+import useApplicationApi from "../../api/useApplicationApi";
 import useAuth from "../../hooks/useAuth";
 import ApplicationsList from "./ApplicationsList";
 import ApplicationsStat from "./ApplicationsStat";
 
 const MyApplications = () => {
     const { user } = useAuth();
+    const { myApplicationsPromise } = useApplicationApi();
     return (
         <div className="text-center py-5 space-y-5">
             <ApplicationsStat></ApplicationsStat>
@@ -16,9 +17,8 @@ const MyApplications = () => {
                 }
             >
                 <ApplicationsList
-                    applicationsPromise={applicationsPromise(
-                        user.email,
-                        user.accessToken
+                    applicationsPromise={myApplicationsPromise(
+                        user.email
                     )}
                 ></ApplicationsList>
             </Suspense>
